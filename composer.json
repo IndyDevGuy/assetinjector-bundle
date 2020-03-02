@@ -1,0 +1,32 @@
+{
+  "name": "indydevguy/assetinjector-bundle",
+  "description": "Makes it easier to display scripts and stylesheets in a managed way. Can also display twig templates with variables.",
+  "homepage": "https://github.com/MaSt3r-iLLuSioN/assetinjector-bundle",
+  "keywords": [
+    "IndyDevGuy",
+    "Symfony Asset Injector",
+    "Symfony",
+    "Symfony 4"
+  ],
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "IndyDevGuy",
+      "email": "contact@indydevguy.com",
+      "role": "Development"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "IndyDevGuy\\AssetInjectorBundle\\": ""
+    }
+  },
+  "require": {
+    "doctrine/doctrine-bundle":  "^2.0",
+    "symfony/framework-bundle": "^4.0",
+    "sensio/framework-extra-bundle": "^5.1",
+    "symfony/security-bundle": "^4.0",
+    "ext-json": "*"
+  }
+}

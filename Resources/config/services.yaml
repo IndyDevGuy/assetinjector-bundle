@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: true
+
+    assetinjector.assetinjector:
+        class: IndyDevGuy\AssetInjectorBundle\Service\AssetInjector
+        arguments: ['@event_dispatcher']
