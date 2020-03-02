@@ -1,5 +1,5 @@
 <?php
-namespace IndyDevGuy\AssetInjector\DependencyInjection;
+namespace IndyDevGuy\AssetInjectorBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,12 +13,14 @@ class AssetInjectorExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        //var_dump('is loading config');
+        //exit();
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
     }
 
     public function getAlias()
     {
-        return 'assetinjector';
+        return 'asset_injector';
     }
 }

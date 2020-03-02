@@ -4,6 +4,13 @@ services:
         autoconfigure: false
         public: true
 
-    assetinjector.assetinjector:
-        class: IndyDevGuy\AssetInjectorBundle\Service\AssetInjector
+    IndyDevGuy\AssetInjectorBundle\Service\AssetInjector:
         arguments: ['@event_dispatcher']
+
+    IndyDevGuy\AssetInjectorBundle\DataCollector\AssetInjectorCollector:
+        arguments: ['@IndyDevGuy\AssetInjectorBundle\Service\AssetInjector']
+        tags:
+            -
+                name: data_collector
+                template: '@AssetInjector/data_collector/assetinjector.html.twig'
+                id: 'asset_injector.assetinjector_collector'

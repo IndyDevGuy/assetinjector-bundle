@@ -1,7 +1,7 @@
 <?php
 namespace IndyDevGuy\AssetInjectorBundle\Modal\Package;
 
-use App\AssetInjector\Modal\Asset\AssetInjectorAssetInterface;
+use IndyDevGuy\AssetInjectorBundle\Modal\Asset\AssetInjectorAssetInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class AssetPackage implements AssetInjectorPackageInterface

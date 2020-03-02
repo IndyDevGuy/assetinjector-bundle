@@ -36,7 +36,7 @@ class AssetInjectorCollector extends DataCollector
      */
     public function getName()
     {
-        return 'app.assetinjector_collector';
+        return 'asset_injector.assetinjector_collector';
     }
 
     public function reset()

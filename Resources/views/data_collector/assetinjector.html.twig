@@ -1,0 +1,135 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        {# this is the content displayed as a panel in the toolbar #}
+        <svg x="0px" y="0px" viewBox="-362.4 459.1 500 500" enable-background="new -362.4 459.1 500 500" xml:space="preserve">
+            <radialGradient id="SVGID_1_" cx="-1002.9115" cy="1088.6691" r="0.6375" gradientTransform="matrix(545.6736 0 0 -528.3113 547071.625 575749.0625)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" style="stop-color:#423325;stop-opacity:0.98"/>
+                <stop offset="1" style="stop-color:#1C0A00"/>
+            </radialGradient>
+            <path fill="#222222" d="M-341.6,493h457.7v445.3h-457.7V493z"/>
+            <path fill="#aaaaaa" d="M-341.6,493h457.7v445.3h-457.7V493z M-362.4,959.1H137V472.2h-499.4V959.1z M-35.3,645.8  c0-1.7,0.6-2.5,2.5-2.5h32.7c1.7,0,2.5,0.6,2.5,2.5v164.2c0,1.7-0.4,2.5-2.5,2.5h-32.3c-2.1,0-2.7-1-2.7-2.7v-164H-35.3L-35.3,645.8  z M-37.6,598.5c0-13.3,9.4-21.2,21.2-21.2c12.7,0,21.2,8.5,21.2,21.2c0,13.7-8.9,21.2-21.6,21.2C-28.8,619.8-37.6,612.3-37.6,598.5z   M-131.2,714.2c-5.8-23.1-19.6-73.4-24.8-97.8h-0.4c-4.4,24.3-15.4,65.5-24.1,97.8H-131.2L-131.2,714.2z M-189,747.9l-16.4,62.4  c-0.4,1.7-1,2.1-3.1,2.1h-30.6c-2.1,0-2.5-0.6-2.1-3.1l59.1-206.8c1-3.7,1.7-7.1,2.1-17.3c0-1.5,0.6-2.1,1.7-2.1h43.7  c1.5,0,2.1,0.4,2.5,2.1l66.2,224.5c0.4,1.7,0,2.7-1.7,2.7h-34.5c-1.7,0-2.7-0.4-3.1-1.9l-17.1-62.6H-189L-189,747.9z"/>
+        </svg>
+        <span class="sf-toolbar-value">Asset Injector</span>
+    {% endset %}
+
+    {% set text %}
+        {# this is the content displayed when hovering the mouse over
+           the toolbar panel #}
+        <div class="sf-toolbar-info-piece">
+            <span class="sf-toolbar-header">
+                <b class="sf-toolbar-ajax-info">
+                    <span class="sf-toolbar-status">
+                        {{ collector.packageCount }}
+                    </span> Packages
+                </b>
+            </span>
+            <span class="sf-toolbar-header">
+                <b class="sf-toolbar-ajax-info"><span class="sf-toolbar-status">{{ collector.totalAssetCount }}</span> Assets</b>
+            </span>
+            <span style="float: right;margin-top: 3px;margin-left: 8px;">
+                <svg x="0px" y="0px" viewBox="-362.4 459.1 500 500" enable-background="new -362.4 459.1 500 500" xml:space="preserve">
+            <radialGradient id="SVGID_1_" cx="-1002.9115" cy="1088.6691" r="0.6375" gradientTransform="matrix(545.6736 0 0 -528.3113 547071.625 575749.0625)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" style="stop-color:#423325;stop-opacity:0.98"/>
+                <stop offset="1" style="stop-color:#1C0A00"/>
+            </radialGradient>
+                <path fill="#222222" d="M-341.6,493h457.7v445.3h-457.7V493z"/>
+                <path fill="#aaaaaa" d="M-341.6,493h457.7v445.3h-457.7V493z M-362.4,959.1H137V472.2h-499.4V959.1z M-35.3,645.8  c0-1.7,0.6-2.5,2.5-2.5h32.7c1.7,0,2.5,0.6,2.5,2.5v164.2c0,1.7-0.4,2.5-2.5,2.5h-32.3c-2.1,0-2.7-1-2.7-2.7v-164H-35.3L-35.3,645.8  z M-37.6,598.5c0-13.3,9.4-21.2,21.2-21.2c12.7,0,21.2,8.5,21.2,21.2c0,13.7-8.9,21.2-21.6,21.2C-28.8,619.8-37.6,612.3-37.6,598.5z   M-131.2,714.2c-5.8-23.1-19.6-73.4-24.8-97.8h-0.4c-4.4,24.3-15.4,65.5-24.1,97.8H-131.2L-131.2,714.2z M-189,747.9l-16.4,62.4  c-0.4,1.7-1,2.1-3.1,2.1h-30.6c-2.1,0-2.5-0.6-2.1-3.1l59.1-206.8c1-3.7,1.7-7.1,2.1-17.3c0-1.5,0.6-2.1,1.7-2.1h43.7  c1.5,0,2.1,0.4,2.5,2.1l66.2,224.5c0.4,1.7,0,2.7-1.7,2.7h-34.5c-1.7,0-2.7-0.4-3.1-1.9l-17.1-62.6H-189L-189,747.9z"/>
+        </svg>
+            </span>
+            <span class="sf-toolbar-header" style="float:right;font-size: 13px;margin-top: 5px;">
+                <span style="font-size: 12px;font-style: italic;">Asset Injector {{ collector.injectorVersion }}</span> | <span style="font-size: 12px;"><a href="#">Donate</a> </span> | <span style="font-size: 12px;"><a href="#">View Docs</a> </span>
+            </span>
+
+        </div>
+
+        <div class="sf-toolbar-info-piece">
+            <span class="sf-toolbar-header" style="margin-bottom: -8px;margin-top:5px;">
+                <b class="sf-toolbar-ajax-info">Before Assets: <span class="sf-toolbar-status">{{ collector.beforeAssetCount }}</span></b>
+            </span>
+            <span class="sf-toolbar-header" style="font-size: 13px;margin-bottom: 5px;float:right;margin-top:11px;">
+                <span style="font-size: 13px;font-style: italic;">**before renders assets below the top of asset blocks</span>
+            </span>
+        </div>
+
+        <div class="sf-toolbar-info-piece">
+            <table class="sf-toolbar-ajax-requests" style="width: 480px;">
+                <thead style="display: block;">
+                <tr>
+                    <th style="width: 210px;">Package</th>
+                    <th style="width: 210px;">Name</th>
+                    <th style="width:61px;">Rendered</th>
+                </tr>
+                </thead>
+                <tbody class="sf-toolbar-ajax-request-list" style="display: block;max-height: 150px;overflow-y: auto;overflow-x: hidden; border: 1px solid #222;">
+                {% if collector.beforeData[0][0] is defined %}
+                    {% for tmp in collector.beforeData %}
+                        {% for asset in tmp %}
+                            <tr class="sf-ajax-request sf-ajax-request-ok">
+                                <td style="width: 210px;">{{ asset.package }}  <span class="sf-toolbar-status" style="float:right;font-size: 10px;">{{ asset.packageVersion }}</span></td>
+                                <td style="width: 210px">{{ asset.name }} <span class="sf-toolbar-status" style="float:right;font-size: 10px;">{{ asset.version }}</span></td>
+                                <td style="width: 61px;">
+                                    <span class="sf-toolbar-status sf-toolbar-status-{%  if asset.displayed == true %}green{% else %}red{% endif %}">{% if asset.displayed == true %}YES{% else %}NO{% endif %}</span>
+                                    {{ asset.type }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <tr class="sf-ajax-request sf-ajax-request-ok">
+                        <td style="width:480px;text-align: center;" colspan="5">No assets were injected into the before location.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="sf-toolbar-info-piece">
+            <span class="sf-toolbar-header" style="margin-bottom: -8px;margin-top: 5px;">
+                <b class="sf-toolbar-ajax-info">After Assets:<span class="sf-toolbar-status">{{ collector.afterAssetCount }}</span></b>
+            </span>
+            <span class="sf-toolbar-header" style="font-size: 13px;float: right;margin-top: 11px;margin-bottom: 5px;">
+                <span style="font-size: 13px;font-style: italic;">**after renders assets above the bottom of asset blocks</span>
+            </span>
+        </div>
+
+        <div class="sf-toolbar-info-piece">
+            <table class="sf-toolbar-ajax-requests" style="width: 480px;">
+                <thead style="display: block;">
+                <tr>
+                    <th style="width: 210px;">Package</th>
+                    <th style="width: 210px;">Name</th>
+                    <th style="width:61px;">Rendered</th>
+                </tr>
+                </thead>
+                <tbody class="sf-toolbar-ajax-request-list" style="display: block;max-height: 150px;overflow-y: auto;overflow-x: hidden; border: 1px solid #222;">
+                    {% if collector.afterData[0][0] is defined %}
+                        {% for tmp in collector.afterData %}
+                            {% for asset in tmp %}
+                                <tr class="sf-ajax-request sf-ajax-request-ok">
+                                    <td style="width: 210px;">{{ asset.package }} <span class="sf-toolbar-status" style="float:right;font-size: 10px;">{{ asset.packageVersion }}</span></td>
+                                    <td style="width: 210px">{{ asset.name }} <span class="sf-toolbar-status" style="float:right;font-size: 10px;">{{ asset.version }}</span></td>
+                                    <td style="width: 61px;">
+                                        <span class="sf-toolbar-status sf-toolbar-status-{%  if asset.displayed == true %}green{% else %}red{% endif %}">{% if asset.displayed == true %}YES{% else %}NO{% endif %}</span>
+                                         {{ asset.type }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <tr class="sf-ajax-request sf-ajax-request-ok">
+                            <td style="width:480px;text-align: center" colspan="5">No assets were injected into the after location.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+    {% endset %}
+
+    {# the 'link' value set to 'false' means that this panel doesn't
+       show a section in the web profiler #}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+{% endblock %}

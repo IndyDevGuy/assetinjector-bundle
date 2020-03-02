@@ -1,7 +1,7 @@
 <?php
 namespace IndyDevGuy\AssetInjectorBundle\Modal\Asset;
 
-use App\AssetInjector\Modal\Package\TwigAsset;
+use IndyDevGuy\AssetInjectorBundle\Modal\Package\TwigAsset;
 use Symfony\Component\Asset\PackageInterface;
 
 class Asset implements AssetInjectorAssetInterface
