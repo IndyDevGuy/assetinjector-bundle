@@ -47,9 +47,32 @@ class AssetInjector
 
     public function addPackage(AssetInjectorPackageInterface $package)
     {
-        if(!$this->packages->contains($package)) {
+        $found = false;
+        foreach ($this->packages as $tempPackage) {
+            if ($tempPackage->getName() == $package->getName()) {
+                $found = true;
+                //loop through the assets and add any missing to the temp package
+                foreach($package->getAssets() as $asset)
+                {
+                    $foundAsset = false;
+                    foreach($tempPackage->getAssets() as $tempAsset)
+                    {
+                        if($asset->getName() == $tempAsset->getName())
+                        {
+                            $foundAsset = true;
+                            break;
+                        }
+                    }
+                    if($foundAsset == false)
+                    {
+                        //add this asset to the tempPackage
+                        $tempPackage->addAsset($asset);
+                    }
+                }
+            }
+        }
+        if($found == false) {
             $this->packages->add($package);
-            //var_dump('added package');
         }
     }
 
@@ -151,7 +174,7 @@ class AssetInjector
                             elseif($beforeData['type'] == 'twig')
                             {
                                 $writeLocation = '<!-- BLOCK JAVASCRIPTS -->';
-                                if (strpos($beforeData['data'], '.css') !== false) {
+                                if (strpos($beforeData['data'], '.css.') !== false) {
                                     $writeLocation = '<!-- BLOCK STYLESHEETS -->';
                                 }
                                 $content = $this->writeDataToContent($content,$writeLocation,26,$beforeData['data']);
@@ -166,6 +189,9 @@ class AssetInjector
                 }
                 ++$fP;
             }
+
+            //var_dump();
+
             $fP = 0;
             foreach ($this->afterRenderData as $data) {
                 if (is_array($data)) {
@@ -194,7 +220,7 @@ class AssetInjector
                             {
                                 //var_dump('type is twig');
                                 $writeLocation = '<!-- ENDBLOCK JAVASCRIPTS -->';
-                                if (strpos($afterData['data'], '.css') !== false) {
+                                if (strpos($afterData['data'], '.css.') !== false) {
                                     $writeLocation = '<!-- ENDBLOCK STYLESHEETS -->';
                                 }
                                 $content = $this->writeDataToContent($content,$writeLocation,0,$afterData['data']);
