@@ -1,6 +1,7 @@
 <?php
 namespace IndyDevGuy\AssetInjectorBundle\Service;
 
+use Exception;
 use IndyDevGuy\AssetInjectorBundle\Modal\Package\AssetInjectorPackageInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -8,13 +9,37 @@ use Twig\Environment;
 
 class AssetInjector
 {
+    /**
+     * @var EventDispatcherInterface
+     */
     private $dispatcher;
+    /**
+     * @var ArrayCollection
+     */
     private $packages;
+    /**
+     * @var array
+     */
     private $beforeRenderData;
+    /**
+     * @var array
+     */
     private $afterRenderData;
+    /**
+     * @var bool
+     */
     private $rendered;
+    /**
+     * @var int
+     */
     private $beforeAssetCount;
+    /**
+     * @var int
+     */
     private $afterAssetCount;
+    /**
+     * @var string
+     */
     private $version;
 
     public function __construct(EventDispatcherInterface $dispatcher)
@@ -30,22 +55,22 @@ class AssetInjector
         $this->version = 'v1.0';
     }
 
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
 
-    public function getBeforeRenderData()
+    public function getBeforeRenderData(): array
     {
         return $this->beforeRenderData;
     }
 
-    public function getAfterRenderData()
+    public function getAfterRenderData(): array
     {
         return $this->afterRenderData;
     }
 
-    public function addPackage(AssetInjectorPackageInterface $package)
+    public function addPackage(AssetInjectorPackageInterface $package): void
     {
         $found = false;
         foreach ($this->packages as $tempPackage) {
@@ -76,7 +101,7 @@ class AssetInjector
         }
     }
 
-    public function removePackage(AssetInjectorPackageInterface $package)
+    public function removePackage(AssetInjectorPackageInterface $package): void
     {
         if($this->packages->contains($package)) {
             $this->packages->removeElement($package);
@@ -89,29 +114,34 @@ class AssetInjector
         return $this->packages;
     }
 
-    public function getBeforeAssetCount()
+    public function getBeforeAssetCount(): int
     {
         return $this->beforeAssetCount;
     }
 
-    public function getAfterAssetCount()
+    public function getAfterAssetCount(): int
     {
         return $this->afterAssetCount;
     }
 
-    private function orderPackages()
+    private function orderPackages(): void
     {
-        $iterator = $this->packages->getIterator();
-        $iterator->uasort(function ($first, $second) {
-            if ($first === $second) {
-                return 0;
-            }
-            return $first->getPriority() > $second->getPriority() ? -1 : 1;
-        });
-        $this->packages = new ArrayCollection(iterator_to_array($iterator));
+        try {
+            $iterator = $this->packages->getIterator();
+            $iterator->uasort(static function ($first, $second) {
+                if ($first === $second) {
+                    return 0;
+                }
+                return $first->getPriority() > $second->getPriority() ? -1 : 1;
+            });
+            $this->packages = new ArrayCollection(iterator_to_array($iterator));
+        } catch (Exception $e) {
+            print $e->getMessage();
+            exit();
+        }
     }
 
-    private function setRenderData()
+    private function setRenderData(): void
     {
         if($this->rendered == false) {
             foreach ($this->packages as $package) {
@@ -135,7 +165,7 @@ class AssetInjector
         $this->afterRenderData = array_values($afterData);
     }
 
-    public function render()
+    public function render(): void
     {
         $this->orderPackages();
         $this->setRenderData();
