@@ -5,6 +5,7 @@ use IndyDevGuy\AssetInjectorBundle\Service\AssetInjector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Throwable;
 
 class AssetInjectorCollector extends DataCollector
 {
@@ -18,7 +19,7 @@ class AssetInjectorCollector extends DataCollector
     /**
      * @inheritDoc
      */
-    public function collect(Request $request, Response $response)
+    public function collect(Request $request, Response $response, ?Throwable $exception = NULL)
     {
         $this->data = [
             'packageCount'=>$this->assetInjector->getPackages()->count(),
