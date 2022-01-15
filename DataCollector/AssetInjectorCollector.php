@@ -35,7 +35,7 @@ class AssetInjectorCollector extends DataCollector
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName():string
     {
         return 'asset_injector.assetinjector_collector';
     }
