@@ -7,7 +7,9 @@
     "Symfony Asset Injector",
     "Symfony",
     "Symfony 4",
-    "Symfony 5"
+    "Symfony 5",
+    "Symfony 6",
+    "Symfony 7"
   ],
   "type": "symfony-bundle",
   "license": "MIT",
@@ -24,10 +26,10 @@
     }
   },
   "require": {
-    "doctrine/doctrine-bundle":  "^2.0",
-    "symfony/framework-bundle": "^4.0|^5.0",
-    "sensio/framework-extra-bundle": "^5.1|^6.0",
-    "symfony/security-bundle": "^4.0|^5.0",
+    "doctrine/doctrine-bundle":  "^2.0|^3.0",
+    "symfony/framework-bundle": "^4.0|^5.0|^6.0|^7.0",
+    "sensio/framework-extra-bundle": "^5.1|^6.0|^7.0",
+    "symfony/security-bundle": "^4.0|^5.0|^6.0|^7.0",
     "ext-json": "*"
   }
 }
